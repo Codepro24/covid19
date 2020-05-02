@@ -1,12 +1,17 @@
 import React from 'react';
 import SearchBar from './SearchBar';
 import ResultsList from './ResultsList';
+import covidTracker from '../apis/covidTracker';
 
 class App extends React.Component {
     state = {results: []};
 
-    handleSubmit = (term) => {
-        console.log(term);
+    handleSubmit = async (term) => {
+        //console.log(term);
+        const response = await covidTracker.get("/dataset/api/nsw-covid-19-cases.json");
+        //this.setState({results: response})
+        console.log(response);
+        
     }
 
   render() {
