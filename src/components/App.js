@@ -1,7 +1,10 @@
+import './App.css';
 import React from 'react';
 import SearchBar from './SearchBar';
-import ResultsList from './ResultsList';
+import ResultsDisplay from './ResultsDisplay';
 import covidTracker from '../apis/covidTracker';
+import VideoNews from './VideoNews';
+import Others from './Others';
 
 class App extends React.Component {
     state = {results: [], confirmed:''};
@@ -21,11 +24,21 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="ui container" style={{margin:'15px'}}>
-        <SearchBar handleSubmit={this.handleSubmit} />
-        <ResultsList />
-      </div>
-    );
+       <div className="for-Margin ui container">
+          <SearchBar handleSubmit={this.handleSubmit} />
+          <div className="ui grid">
+            <div className="rule-border four wide column">
+              <ResultsDisplay display={this.state.results} />
+            </div>
+            <div className="rule-border six wide column">
+              <VideoNews />
+            </div>
+            <div className="rule-border six wide column">
+              <Others />
+            </div>
+            </div>
+           </div>
+          );
   }
 }
 
