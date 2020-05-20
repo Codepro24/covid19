@@ -1,26 +1,42 @@
 import './App.css';
 import React from 'react';
+import covidTracker from '../apis/covidTracker';
+import youTube from '../apis/youTube';
 import SearchBar from './SearchBar';
 import ResultsDisplay from './ResultsDisplay';
-import covidTracker from '../apis/covidTracker';
 import VideoNews from './VideoNews';
 import Others from './Others';
 
 class App extends React.Component {
-    state = {results: [], confirmed:''};
+    state = {
+      results: [],
+      confirmed:'',
+      videos:[],
+      selectedVideo: null
+    };
 
     handleSubmit = async (term) => {
-        //console.log(term);
-        const response = await covidTracker.get("/dataset/api/nsw-covid-19-cases.json");
-        //this.setState({results: response})
-        console.log(response);
-        this.setState({results: response.data[0],
+        console.log(term);
+        
+        if (term === "news" || term === "video") {
+          const response =  await youTube.get('/search', {
+            params: {
+              q: term
+            }    
+          })
+          //console.log(response);
+          this.setState({videos: response.data.items});
+
+        } 
+        else {
+          const response = await covidTracker.get("/dataset/api/nsw-covid-19-cases.json");
+          this.setState({results: response.data[0],
             confirmed: response.data[0].confirmed_cases
         });
-        console.log(this.state.confirmed);
-        console.log(this.state.results);
-
+          console.log(response);
+          //this.setState({videos:  });  
         }
+      }
 
   render() {
     return (
@@ -31,7 +47,7 @@ class App extends React.Component {
               <ResultsDisplay display={this.state.results} />
             </div>
             <div className="rule-border six wide column">
-              <VideoNews />
+              <VideoNews video={this.state.videos}/>
             </div>
             <div className="rule-border six wide column">
               <Others />
