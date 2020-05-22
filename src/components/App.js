@@ -15,6 +15,15 @@ class App extends React.Component {
       selectedVideo: null
     };
 
+    componentDidMount() {
+      this.handleSubmit();
+      //console.log(this.handleSubmit);
+      fetch("https://api.covid19api.co/")
+      .then(response => response.json())
+      .then(result => console.log(result))
+      .catch(error => console.log("error", error));
+    }
+
     handleSubmit = async (term) => {
         console.log(term);
         
