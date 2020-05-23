@@ -20,7 +20,7 @@ class SearchBar extends React.Component  {
                   <form onSubmit={this.handleSubmit} className="ui form">
                     <div className="field">
                       <label>Search for COVID 19 information
-                        <input value={this.state.term} onChange={this.handleChange} />
+                        <input value={this.state.term} onChange={this.handleChange} placeholder="e.g. search by country" />
                       </label>
                     </div>
                   </form>

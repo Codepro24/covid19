@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
-import covidTracker from '../apis/covidTracker';
-import youTube from '../apis/youTube';
+//import covidTracker from '../apis/covidTracker';
+//import youTube from '../apis/youTube';
 import SearchBar from './SearchBar';
 import ResultsDisplay from './ResultsDisplay';
 import VideoNews from './VideoNews';
@@ -18,33 +18,21 @@ class App extends React.Component {
     componentDidMount() {
       this.handleSubmit();
       //console.log(this.handleSubmit);
-      fetch("https://api.covid19api.co/")
+      //NSW data api?
+      //https://data.nsw.gov.au/data/api/3/action/package_show?id=aefcde60-3b0c-4bc0-9af1-6fe652944ec2
+      const allData = fetch("https://api.covid19api.com/")
       .then(response => response.json())
       .then(result => console.log(result))
       .catch(error => console.log("error", error));
+      console.log(allData);
     }
 
     handleSubmit = async (term) => {
-        console.log(term);
-        
-        if (term === "news" || term === "video") {
-          const response =  await youTube.get('/search', {
-            params: {
-              q: term
-            }    
-          })
-          //console.log(response);
-          this.setState({videos: response.data.items});
-
-        } 
-        else {
-          const response = await covidTracker.get("/dataset/api/nsw-covid-19-cases.json");
-          this.setState({results: response.data[0],
-            confirmed: response.data[0].confirmed_cases
-        });
-          console.log(response);
-          //this.setState({videos:  });  
-        }
+      //maybe use filter to filter 'term'
+      // const { robots, searchfield } = this.state;
+      //   const filteredRobots = robots.filter(robot => {
+      //       return robot.name.toLowerCase().includes(searchfield.toLowerCase())  
+      
       }
 
   render() {
