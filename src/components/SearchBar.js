@@ -22,6 +22,7 @@ class SearchBar extends React.Component  {
                       <label>Search for COVID 19 information
                         <input value={this.state.term} onChange={this.handleChange} placeholder="e.g. search by country" />
                       </label>
+                      <h5>{this.props.display}</h5>
                     </div>
                   </form>
                 </div>
