@@ -3,39 +3,35 @@ import React from 'react';
 import SearchBar from './SearchBar';
 import ResultsDisplay from './ResultsDisplay';
 import VideoNews from './VideoNews';
-import Others from './Others';
 
 class App extends React.Component {
     state = {
       results: [],
-      confirmed:'',
       videos:[],
-      selectedVideo: null,
       display: '',
-      //term: 'empty'
+      term: ''
     };
     componentDidMount() {
-      console.log(this);
-      //this.handleSubmit();
-      //console.log(this.handleSubmit);
+      this.handleSubmit();
+      console.log(this.handleSubmit);
       //NSW data api?
       //https://data.nsw.gov.au/data/api/3/action/package_show?id=aefcde60-3b0c-4bc0-9af1-6fe652944ec2
     }
 
-    // handleSubmit = term => {
-    //   console.log(term);
+    handleSubmit =  async term => {
+      console.log(term);
       
-    //   // let searchTerm = 'covid';
+      let searchTerm = 'covid';
 
-    //   // if (term.includes(searchTerm.toLowerCase())) {
-    //   //   const allData =  await fetch("https://api.covid19api.com/")
-    //   //   .then(response => response.json())
-    //   //   .then(result => console.log(result))
-    //   //   .catch(error => console.log("error", error));
-    //   //   console.log(allData);
-    //   // } else {
-    //   //   this.setState({display: 'Please enter covid related search'});
-    //   // }
+      if (term.includes(searchTerm.toLowerCase())) {
+        const allData =  await fetch("https://data.nsw.gov.au/data/api/3/action/package_show?id=aefcde60-3b0c-4bc0-9af1-6fe652944ec2")
+        .then(response => response.json())
+        .then(result => console.log(result))
+        .catch(error => console.log("error", error));
+        console.log(allData);
+      } 
+         this.setState({display: 'Please enter covid related search'});
+    }
             
     //   //maybe use filter to filter 'term'
     //   // const { robots, searchfield } = this.state;
@@ -49,17 +45,14 @@ class App extends React.Component {
        <div className="for-Margin ui container">
           <SearchBar display = {this.state.display}/>
           <div className="ui grid">
-            <div className="rule-border four wide column">
+            <div className="rule-border eight wide column">
               <ResultsDisplay display={this.state.results} />
             </div>
-            <div className="rule-border six wide column">
+            <div className="eight wide column">
               <VideoNews video={this.state.videos}/>
             </div>
-            <div className="rule-border six wide column">
-              <Others />
-            </div>
-            </div>
-           </div>
+          </div>
+        </div>
           );
   }
 }

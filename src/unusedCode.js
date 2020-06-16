@@ -35,7 +35,6 @@ if (term === "news" || term === "video") {
   }
 
   //inside SearchBar render()
-  <div className= "ui segment">
                   <form onSubmit={this.handleSubmit} className="ui form">
                     <div className="field">
                       <label style={{marginBottom: '15px'}}>Search for COVID 19 information</label>
@@ -43,5 +42,4 @@ if (term === "news" || term === "video") {
                       <h5>{this.props.display}</h5>
                     </div>
                   </form>
-                </div>
-              );
+                
