@@ -12,7 +12,7 @@ class App extends React.Component {
       term: ''
     };
     componentDidMount() {
-      this.handleSubmit();
+      this.handleSubmit("covid");
       console.log(this.handleSubmit);
       //NSW data api?
       //https://data.nsw.gov.au/data/api/3/action/package_show?id=aefcde60-3b0c-4bc0-9af1-6fe652944ec2
@@ -24,26 +24,21 @@ class App extends React.Component {
       let searchTerm = 'covid';
 
       if (term.includes(searchTerm.toLowerCase())) {
-        const allData =  await fetch("https://data.nsw.gov.au/data/api/3/action/package_show?id=aefcde60-3b0c-4bc0-9af1-6fe652944ec2")
-        .then(response => response.json())
-        .then(result => console.log(result))
-        .catch(error => console.log("error", error));
+        const allData =  await fetch("https://data.nsw.gov.au/data/api/3/action/package_show?id=aefcde60-3b0c-4bc0-9af1-6fe652944ec2");
+        // .then(response => response.json())
+        // .then(result => console.log(result))
+        // .catch(error => console.log("error", error));
         console.log(allData);
-      } 
-         this.setState({display: 'Please enter covid related search'});
+      } else 
+         {
+           this.setState({display: 'Please enter covid related search'})
+         };
     }
-            
-    //   //maybe use filter to filter 'term'
-    //   // const { robots, searchfield } = this.state;
-    //   //   const filteredRobots = robots.filter(robot => {
-    //   //       return robot.name.toLowerCase().includes(searchfield.toLowerCase())  
-      
-    //   }
-
+    
   render() {
     return (
        <div className="for-Margin ui container">
-          <SearchBar display = {this.state.display}/>
+          <SearchBar display = {this.state.display} handleSubmit = {this.handleSubmit}/>
           <div className="ui grid">
             <div className="rule-border eight wide column">
               <ResultsDisplay display={this.state.results} />

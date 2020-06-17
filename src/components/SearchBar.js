@@ -6,17 +6,19 @@ class SearchBar extends React.Component  {
   }
 
   componentDidMount() {
-    //console.log(this.props.display);
+    console.log(this.props);
   }
 
-  handleSubmit = event => {
-    event.preventDefault();
-    
-  }
-  handleChange = event => {
+    handleChange = event => {
     this.setState({term: event.target.value})
     console.log(this.state.term);
   } 
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.handleSubmit(this.state.term);
+    
+  }
         render() {
             return (
                 <div className= "ui segment">
